@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "tsx src/index.ts"
+    "start": "tsx src/index.ts",
+    "publish": "tsx src/publish.ts"
   },
   "dependencies": {
     "@gmx-io/sdk": "^1.2.1",
