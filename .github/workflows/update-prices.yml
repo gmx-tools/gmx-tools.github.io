@@ -24,5 +24,7 @@ jobs:
       - name: Update Gist
         env:
           GH_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: b236a9d1a7f596ffec58c1dc006683ee
         run: |
-          gh gist edit b236a9d1a7f596ffec58c1dc006683ee -f prices.csv dist/prices.csv -f prices.json dist/prices.json
+          gh gist edit $GIST_ID -f prices.csv < dist/prices.csv
+          gh gist edit $GIST_ID -f prices.json < dist/prices.json
