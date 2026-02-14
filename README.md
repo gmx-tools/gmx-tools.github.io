@@ -18,8 +18,8 @@ Live GM and GLV token prices from GMX V2. Updated every 5 minutes via GitHub Act
 
 | Network | GM Tokens | GLV Vaults |
 |---------|-----------|------------|
-| Arbitrum | All markets | All vaults |
-| Avalanche | All markets | All vaults |
+| Arbitrum | Whitelisted assets | All vaults |
+| Avalanche | Whitelisted assets | All vaults |
 
 ## Google Sheets
 
@@ -39,6 +39,12 @@ For a specific network:
 ```
 =IMPORTDATA("https://gmx-tools.github.io/v1/arbitrum/prices.csv")
 =IMPORTDATA("https://gmx-tools.github.io/v1/avalanche/prices.csv")
+```
+
+Single token price (replace `ETH` with any symbol — BTC, SOL, LINK...):
+
+```
+=INDEX(QUERY(IMPORTDATA("https://gmx-tools.github.io/v1/arbitrum/prices.csv"), "SELECT Col4 WHERE Col2 STARTS WITH 'ETH/' LIMIT 1"))
 ```
 
 ## CLI Usage

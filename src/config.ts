@@ -15,6 +15,21 @@ export interface NetworkConfig {
   };
 }
 
+/** Whitelist of reliable asset symbols (index tokens). Meme tokens are excluded. */
+export const WHITELISTED_SYMBOLS = new Set([
+  // Major L1 / L2
+  "BTC", "ETH", "SOL", "AVAX", "BNB", "ADA", "DOT", "ATOM", "NEAR",
+  "TRX", "XRP", "XLM", "TON", "SUI", "APT", "SEI", "TIA", "POL",
+  "OP", "ARB", "MNT", "S", "STX", "ICP", "HBAR", "KAS", "FIL",
+  "ALGO", "BCH", "LTC", "DASH", "ZEC",
+  // DeFi / Infrastructure
+  "LINK", "AAVE", "UNI", "MKR", "CRV", "CVX", "PENDLE", "GMX",
+  "DYDX", "JUP", "JTO", "INJ", "ENA", "ONDO", "MORPHO", "SKY",
+  "RENDER", "FET", "TAO", "EIGEN", "ZRO", "AR", "WLD",
+  // Gold / wrapped / other established
+  "XAUT", "XAUT.v2", "XAUt0", "OKB", "ORDI", "HYPE",
+]);
+
 export const NETWORKS: NetworkConfig[] = [
   {
     slug: "arbitrum",

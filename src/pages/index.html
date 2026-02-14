@@ -67,6 +67,12 @@
           <pre><code>=IMPORTDATA("https://gmx-tools.github.io/v1/avalanche/prices.csv")</code></pre>
           <button class="copy-btn" onclick="copyText('=IMPORTDATA(&quot;https://gmx-tools.github.io/v1/avalanche/prices.csv&quot;)')">Copy</button>
         </div>
+        <div class="card">
+          <h3>Single token price</h3>
+          <p>Replace <strong>ETH</strong> with any token symbol (BTC, SOL, LINK...):</p>
+          <pre><code>=INDEX(QUERY(IMPORTDATA("https://gmx-tools.github.io/v1/arbitrum/prices.csv"), "SELECT Col4 WHERE Col2 STARTS WITH 'ETH/' LIMIT 1"))</code></pre>
+          <button class="copy-btn" onclick="copyText('=INDEX(QUERY(IMPORTDATA(&quot;https://gmx-tools.github.io/v1/arbitrum/prices.csv&quot;), &quot;SELECT Col4 WHERE Col2 STARTS WITH \'ETH/\' LIMIT 1&quot;))')">Copy</button>
+        </div>
       </div>
     </section>
 

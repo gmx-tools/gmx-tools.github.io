@@ -4,7 +4,7 @@ import {
   encodeAbiParameters,
   keccak256,
 } from "viem";
-import type { NetworkConfig } from "./config.js";
+import { type NetworkConfig, WHITELISTED_SYMBOLS } from "./config.js";
 import type { OracleMarket, Ticker, TokenMeta, GmResult, GlvResult } from "./types.js";
 import { SyntheticsReaderAbi, GlvReaderAbi } from "./abis.js";
 
@@ -62,7 +62,13 @@ export async function fetchGmPrices(
     return indexP && longP && shortP;
   });
 
-  const results = await processBatches(viable, BATCH_SIZE, async (m) => {
+  // Whitelist: only reliable assets, exclude meme tokens
+  const filtered = viable.filter((m) => {
+    const sym = tokenMeta[m.indexToken.toLowerCase()]?.symbol;
+    return sym && WHITELISTED_SYMBOLS.has(sym);
+  });
+
+  const results = await processBatches(filtered, BATCH_SIZE, async (m) => {
     const indexP = tickers[m.indexToken.toLowerCase()];
     const longP = tickers[m.longToken.toLowerCase()];
     const shortP = tickers[m.shortToken.toLowerCase()];
