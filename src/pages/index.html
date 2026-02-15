@@ -118,10 +118,6 @@
       return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
     }
 
-    function addr(s) {
-      return s.slice(0, 6) + '...' + s.slice(-4);
-    }
-
     function renderTable(items, type) {
       if (!items || items.length === 0) return '';
       const isGlv = type === 'glv';
@@ -136,10 +132,10 @@
 
       for (const item of items) {
         html += '<tr>';
-        html += '<td>' + item.name + '</td>';
-        html += '<td class="address">' + addr(item.address) + '</td>';
-        html += '<td class="price">' + fmt(item.price) + '</td>';
-        html += '<td class="pool-value">' + fmtPool(item[poolKey]) + '</td>';
+        html += '<td class="copyable" data-raw="' + item.name + '" onclick="copyCell(this)">' + item.name + '</td>';
+        html += '<td class="address copyable" data-raw="' + item.address + '" onclick="copyCell(this)">' + item.address + '</td>';
+        html += '<td class="price copyable" data-raw="' + item.price + '" onclick="copyCell(this)">' + fmt(item.price) + '</td>';
+        html += '<td class="pool-value copyable" data-raw="' + item[poolKey] + '" onclick="copyCell(this)">' + fmtPool(item[poolKey]) + '</td>';
         html += '</tr>';
       }
 
@@ -174,11 +170,19 @@
       render();
     });
 
+    function copyCell(td) {
+      var text = td.dataset.raw || td.textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        td.classList.add('copied');
+        setTimeout(function() { td.classList.remove('copied'); }, 1000);
+      });
+    }
+
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         const btn = event.target;
         btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy formula', 1500);
+        setTimeout(() => btn.textContent = 'Copy', 1500);
       });
     }
 

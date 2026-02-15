@@ -176,8 +176,40 @@ tr:hover td {
 
 .address {
   font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, monospace;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
+  word-break: break-all;
+  white-space: normal;
+  max-width: 240px;
+  min-width: 120px;
+}
+
+/* Copyable cells */
+.copyable {
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s;
+}
+
+.copyable:hover {
+  background: var(--accent) !important;
+  color: #fff;
+}
+
+.copyable.copied::after {
+  content: 'Copied!';
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* Section subtitle */
